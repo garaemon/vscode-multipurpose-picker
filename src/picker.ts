@@ -150,7 +150,6 @@ export class MPPicker {
 
   onDidAccept() {
     const pickedItem = this.picker.selectedItems[0];
-    vscode.window.showInformationMessage(`selected item is ${pickedItem.label}`);
     pickedItem.action();
     this.picker.hide();
   }
