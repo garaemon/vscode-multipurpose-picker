@@ -1,8 +1,13 @@
 {
-  "name": "vscode-multipurpose-picker",
-  "displayName": "vscode-multipurpose-picker",
+  "name": "multipurpose-picker",
+  "displayName": "multipurpose-picker",
   "description": "This plugin allows you to access VS code features through quick picker interface. This plugin is heavily inspired by anything and helm of emacs.",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/garaemon/vscode-multipurpose-picker"
+  },
+  "publisher": "garaemon",
   "engines": {
     "vscode": "^1.74.0"
   },
