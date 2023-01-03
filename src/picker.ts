@@ -111,7 +111,7 @@ export class MPPicker {
       return directory;
     }
     else {
-      return this.getGitRootDirectory(path.join(directory, '..'));
+      return this.getGitRootDirectory(path.resolve(path.join(directory, '..')));
     }
   }
 
