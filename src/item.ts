@@ -4,6 +4,7 @@ export enum ItemType {
   Git,
   File,
   Command,
+  Editor,
 }
 
 export class MPItem implements QuickPickItem {
@@ -21,6 +22,9 @@ export class MPItem implements QuickPickItem {
     }
     else if (commandType === ItemType.Command) {
       this.label = `$(terminal) ${label}`;
+    }
+    else if (commandType === ItemType.Editor) {
+      this.label = `$(edit) ${label}`;
     }
     else {
       this.label = label;
