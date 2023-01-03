@@ -46,7 +46,6 @@ export class MPPicker {
             }
           }
         }
-        console.log(label);
         const commandItem = new MPItem(ItemType.Command, label, () => {
           vscode.commands.executeCommand(command.command);
         });
