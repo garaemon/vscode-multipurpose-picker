@@ -139,12 +139,35 @@ export class MPPicker {
     }
   };
 
+  async getEditorItems() {
+    interface UriObject {
+      uri: vscode.Uri;
+    }
+    const items = [];
+    let tabIndex: number = 0;
+    for (const tabGroup of vscode.window.tabGroups.all) {
+      for (const tab of tabGroup.tabs) {
+        if ((tab.input as object).hasOwnProperty('uri')) {
+          const input = tab.input as UriObject;
+          items.push(new MPItem(ItemType.Editor, `${tab.label} (Tab ${tabIndex})`, () => {
+            vscode.workspace.openTextDocument(input.uri).then((document) => {
+              vscode.window.showTextDocument(document);
+            });
+          }));
+        }
+      }
+      tabIndex = tabIndex + 1;
+    }
+    return items;
+  }
+
   async updateItems() {
     // Files
+    const activeEditors = await this.getEditorItems();
     const fileItems = await this.getFileItems();
     const gitFiles = await this.getGitFiles();
     const commandItems = this.getCommandItems();
-    this.picker.items = fileItems.concat(gitFiles).concat(commandItems);
+    this.picker.items = activeEditors.concat(fileItems).concat(gitFiles).concat(commandItems);
   }
 
   onDidAccept() {
