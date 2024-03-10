@@ -70,7 +70,16 @@ export class MPPicker {
       );
 
       if (folder === undefined) {
-        return path.dirname(editor.document.uri.path);
+        const workspaces = vscode.workspace.workspaceFolders;
+        if (workspaces !== undefined) {
+          // workspaces[0].uri.path should point to a directory. It is supposed to be a root
+          // directory of the workspace. We don't need to call `path.dirname` because `path.dirname`
+          // returns the parent directory of the workspace.
+          return workspaces[0].uri.path;
+        }
+        else {
+          return path.dirname(editor.document.uri.path);
+        }
       }
       return folder.uri.path;
     }
