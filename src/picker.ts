@@ -156,6 +156,10 @@ export class MPPicker {
     let tabIndex: number = 0;
     for (const tabGroup of vscode.window.tabGroups.all) {
       for (const tab of tabGroup.tabs) {
+        // tab.input can be undefined?
+        if (tab.input === undefined) {
+          continue;
+        }
         if ((tab.input as object).hasOwnProperty('uri')) {
           const input = tab.input as UriObject;
           items.push(new MPItem(ItemType.Editor, `${tab.label} (Tab ${tabIndex})`, () => {
